@@ -17,7 +17,7 @@
 		$scope.files = []
 		var download = function (number) {
 			var start = new Date()
-			$http.get("http://ec2-54-174-131-19.compute-1.amazonaws.com:3000//file" + number)
+			$http.get("http://ec2-54-174-131-19.compute-1.amazonaws.com:3000/file" + number)
 				.then(function (response) {
 					var end = new Date()
 					var duration = ((end.getTime() - start.getTime()) / 1000).toFixed(2)
