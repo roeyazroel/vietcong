@@ -32,6 +32,24 @@ app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
 
+app.all('*', allowCrossDomain);
+
+
+function allowCrossDomain(req, res, next) {
+    if (req.method == 'GET') {
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Cache-Control, Set-Cookie, x-api-key, x-user-uuid, x-is-native');
+        res.header('Access-Control-Allow-Methods', 'GET');
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Credentials', true);
+    } else {
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Cache-Control, Set-Cookie, x-api-key, x-user-uuid, x-is-native');
+        res.header('Access-Control-Allow-Methods', 'POST, PUT, DELETE');
+        res.header('Access-Control-Allow-Origin', req.headers.origin);
+        res.header('Access-Control-Allow-Credentials', true);
+    }
+    next();
+}
+
 /*
 הכי טוב לעשות כמה בדיקות:
 
