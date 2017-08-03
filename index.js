@@ -31,6 +31,16 @@ app.get('/file6', function (req, res) {
   res.sendFile(__dirname +'/files/4MB.gif')
 })
 
+app.get('/file7', function (req, res) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.send('https://media.giphy.com/media/3o8dFi2cJD5ZQwmfxS/giphy.gif')
+})
+
+app.get('/file8', function (req, res) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.send('https://media.giphy.com/media/3o8dFEl4Az3mUqvrkk/giphy.gif')
+})
+
 app.get('*', function (req, res) {
   res.send('Hello')
 })

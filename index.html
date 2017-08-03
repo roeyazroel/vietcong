@@ -6,7 +6,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-aria.js"></script>
 
 <div ng-app="myApp" ng-controller="myCtrl">
-	<div ng-repeat="file in files">
+	<div ng-repeat="file in files track by $index">
 		{{$index}}: {{file.duration}}
 	</div>
 </div>
@@ -21,14 +21,27 @@
 				.then(function (response) {
 					var end = new Date()
 					var duration = ((end.getTime() - start.getTime()) / 1000).toFixed(2)
-					$scope.files[number-1] = {
-						file: response,
-						duration: duration
+					if (number > 6) {
+						$http.get(response.data)
+							.then(function (response) {
+								var end = new Date()
+								var duration = ((end.getTime() - start.getTime()) / 1000).toFixed(2)
+								$scope.files[number - 1] = {
+									file: response,
+									duration: duration
+								}
+							});
+					} else {
+						$scope.files[number - 1] = {
+							file: response,
+							duration: duration
+						}
 					}
 				});
 		}
-		for (var i = 1; i <= 6; i++) {
+		for (var i = 1; i <= 8; i++) {
 			download(i)
 		}
+		console.log($scope.files)
 	});
 </script>
